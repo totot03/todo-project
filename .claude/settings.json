@@ -1,0 +1,37 @@
+{
+  "permissions": {
+    "allow": ["WebSearch", "Bash", "WebFetch", "mcp__playwright", "mcp__sequential-thinking"],
+    "deny": [
+      "Bash(rm -rf *)",
+      "Bash(git push --force*)",
+      "Bash(git push -f *)",
+      "Bash(git reset --hard*)",
+      "Bash(git clean -fd*)",
+      "Bash(npm publish*)",
+      "Read(./**/.env)",
+      "Read(./**/.env.*)",
+      "Read(./**/*.pem)",
+      "Read(./**/*.key)",
+      "Read(./**/application-local.*)",
+      "Read(./**/application-secret.*)"
+    ],
+    "ask": []
+  },
+  "enabledMcpjsonServers": ["playwright"],
+  "enableAllProjectMcpServers": true,
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node .claude/hooks/format-on-edit.mjs",
+            "timeout": 45,
+            "statusMessage": "Prettier 포맷 적용 중"
+          }
+        ]
+      }
+    ]
+  }
+}
