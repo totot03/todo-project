@@ -70,14 +70,14 @@
 - [x] `todo-backend/` Spring Boot **4.1.1** 프로젝트 생성 (JDK 21, Maven Wrapper)
 - [x] `todo-frontend/` Next.js **16.3.3** 프로젝트 생성, shadcn/ui 초기화 (style `radix-nova`)
 - [x] 저장소 3개 각각 `.gitignore` + 품질 도구 구성 (`DEV_TOOLING.md` 1장)
-- [ ] PostgreSQL **데이터베이스 `postgres`** 에 **스키마** `todolist_db`, `todolist_test_db` 생성
+- [x] PostgreSQL **데이터베이스 `postgres`** 에 **스키마** `todolist_db`, `todolist_test_db` 생성
       — 전부 소문자 표기 (`PRD.md` 8.3)
-- [ ] `application.properties` 스키마명 표기 통일 (`PRD.md` RISK-4)
-- [ ] `application-local.properties` 로 DB 비밀번호·JWT 시크릿 분리 + `.gitignore` 처리
+- [x] `application.properties` 스키마명 표기 통일 (`PRD.md` RISK-4)
+- [x] `application-local.properties` 로 DB 비밀번호·JWT 시크릿 분리 + `.gitignore` 처리
       (`PRD.md` RISK-3 / NFR-S03) — **커밋 전 필수**
-- [ ] `application-test.properties` (test 프로필, `todolist_test_db`)
-- [ ] 루트 `README.md` 작성 (한국어)
-- [ ] `GET /api/health` 헬스체크 엔드포인트 (`API_SPEC.md` 4.1)
+- [x] `application-test.properties` (test 프로필, `todolist_test_db`)
+- [x] 루트 `README.md` 작성 (한국어)
+- [x] `GET /api/health` 헬스체크 엔드포인트 (`API_SPEC.md` 4.1)
 
 **완료 조건 (DoD)**
 
@@ -427,25 +427,17 @@ M0 → M1 → M2-A ─┬─→ M2-B ─┐
 
 ## 9. 진행 현황
 
-| 마일스톤         | 상태       | 태그 | 비고                                                                      |
-| ---------------- | ---------- | ---- | ------------------------------------------------------------------------- |
-| M0 스캐폴딩      | 🔄 진행 중 |      | 프로젝트 생성·품질 도구 완료 / DB 스키마·`/api/health`·자격증명 분리 남음 |
-| M1 도메인        | ☐ 대기     |      |                                                                           |
-| M2-A 자체 JWT    | ☐ 대기     |      |                                                                           |
-| M2-B 구글 OAuth2 | ☐ 대기     |      | 구글 콘솔 사전 준비 필요                                                  |
-| M3 Todo API      | ☐ 대기     |      | M2-B와 병행 가능                                                          |
-| M4 프론트 기반   | ☐ 대기     |      |                                                                           |
-| M5 화면 구현     | ☐ 대기     |      |                                                                           |
-| M6 테스트·검증   | ☐ 대기     |      |                                                                           |
-| **v1.0 릴리스**  | ☐          |      |                                                                           |
-| v1.1 AWS 배포    | ☐ 대기     |      |                                                                           |
+| 마일스톤         | 상태    | 태그          | 비고                                                                        |
+| ---------------- | ------- | ------------- | --------------------------------------------------------------------------- |
+| M0 스캐폴딩      | ✅ 완료 | `m0-scaffold` | DoD 전 항목 통과 (health 200, FE build/secretlint 통과, 자격증명 분리 완료) |
+| M1 도메인        | ☐ 대기  |               |                                                                             |
+| M2-A 자체 JWT    | ☐ 대기  |               |                                                                             |
+| M2-B 구글 OAuth2 | ☐ 대기  |               | 구글 콘솔 사전 준비 필요                                                    |
+| M3 Todo API      | ☐ 대기  |               | M2-B와 병행 가능                                                            |
+| M4 프론트 기반   | ☐ 대기  |               |                                                                             |
+| M5 화면 구현     | ☐ 대기  |               |                                                                             |
+| M6 테스트·검증   | ☐ 대기  |               |                                                                             |
+| **v1.0 릴리스**  | ☐       |               |                                                                             |
+| v1.1 AWS 배포    | ☐ 대기  |               |                                                                             |
 
 > 마일스톤을 끝낼 때마다 이 표를 갱신한다.
-
-### M0 잔여 작업 (착수 순서)
-
-1. `application-local.properties` 분리 + `.gitignore` 처리 — **커밋 전 필수** (`PRD.md` RISK-3)
-2. 스키마명 소문자 통일 (`PRD.md` RISK-4)
-3. PostgreSQL 스키마 `todolist_db` · `todolist_test_db` 생성
-4. `GET /api/health` 엔드포인트 + `ApiResponse` 래퍼
-5. 루트 `README.md` (한국어)
