@@ -96,13 +96,13 @@
 
 작업
 
-- [ ] `BaseTimeEntity` + JPA Auditing
-- [ ] `User` 엔티티 (provider, role, nullable password)
-- [ ] `Todo` 엔티티 (LAZY 연관, priority, dueDate)
-- [ ] Soft Delete: `@SQLRestriction("deleted_at IS NULL")`
-- [ ] `UserRepository`, `TodoRepository` 쿼리 메서드
-- [ ] users 부분 유니크 인덱스 DDL (`WHERE deleted_at IS NULL`)
-- [ ] todos 인덱스 `(user_id, deleted_at)`, `(user_id, completed, deleted_at)`
+- [x] `BaseTimeEntity` + JPA Auditing
+- [x] `User` 엔티티 (provider, role, nullable password)
+- [x] `Todo` 엔티티 (LAZY 연관, priority, dueDate)
+- [x] Soft Delete: `@SQLRestriction("deleted_at IS NULL")`
+- [x] `UserRepository`, `TodoRepository` 쿼리 메서드
+- [x] users 부분 유니크 인덱스 DDL (`WHERE deleted_at IS NULL`)
+- [x] todos 인덱스 `(user_id, deleted_at)`, `(user_id, completed, deleted_at)`
 
 **커버 요구사항**: FR-A12, FR-T11 기반 구조 / NFR-P02
 
@@ -427,17 +427,17 @@ M0 → M1 → M2-A ─┬─→ M2-B ─┐
 
 ## 9. 진행 현황
 
-| 마일스톤         | 상태    | 태그          | 비고                                                                        |
-| ---------------- | ------- | ------------- | --------------------------------------------------------------------------- |
-| M0 스캐폴딩      | ✅ 완료 | `m0-scaffold` | DoD 전 항목 통과 (health 200, FE build/secretlint 통과, 자격증명 분리 완료) |
-| M1 도메인        | ☐ 대기  |               |                                                                             |
-| M2-A 자체 JWT    | ☐ 대기  |               |                                                                             |
-| M2-B 구글 OAuth2 | ☐ 대기  |               | 구글 콘솔 사전 준비 필요                                                    |
-| M3 Todo API      | ☐ 대기  |               | M2-B와 병행 가능                                                            |
-| M4 프론트 기반   | ☐ 대기  |               |                                                                             |
-| M5 화면 구현     | ☐ 대기  |               |                                                                             |
-| M6 테스트·검증   | ☐ 대기  |               |                                                                             |
-| **v1.0 릴리스**  | ☐       |               |                                                                             |
-| v1.1 AWS 배포    | ☐ 대기  |               |                                                                             |
+| 마일스톤         | 상태    | 태그          | 비고                                                                                                             |
+| ---------------- | ------- | ------------- | ---------------------------------------------------------------------------------------------------------------- |
+| M0 스캐폴딩      | ✅ 완료 | `m0-scaffold` | DoD 전 항목 통과 (health 200, FE build/secretlint 통과, 자격증명 분리 완료)                                      |
+| M1 도메인        | ✅ 완료 |               | DoD 통과 (`./mvnw verify` 성공, schema.sql 부분 유니크·복합 인덱스 생성 확인). 커밋·`git tag m1-domain`은 미실행 |
+| M2-A 자체 JWT    | ☐ 대기  |               |                                                                                                                  |
+| M2-B 구글 OAuth2 | ☐ 대기  |               | 구글 콘솔 사전 준비 필요                                                                                         |
+| M3 Todo API      | ☐ 대기  |               | M2-B와 병행 가능                                                                                                 |
+| M4 프론트 기반   | ☐ 대기  |               |                                                                                                                  |
+| M5 화면 구현     | ☐ 대기  |               |                                                                                                                  |
+| M6 테스트·검증   | ☐ 대기  |               |                                                                                                                  |
+| **v1.0 릴리스**  | ☐       |               |                                                                                                                  |
+| v1.1 AWS 배포    | ☐ 대기  |               |                                                                                                                  |
 
 > 마일스톤을 끝낼 때마다 이 표를 갱신한다.
