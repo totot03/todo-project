@@ -1,0 +1,32 @@
+#!/usr/bin/env sh
+# ─────────────────────────────────────────────
+# pre-commit — "커밋 순간" 방어선
+#   원칙: 스테이징된 파일만 검사한다 (빠르고, 검사 대상 == 커밋 대상)
+#   타입 체크처럼 프로젝트 전체를 봐야 하는 검사는 pre-push 로 미룬다.
+# ─────────────────────────────────────────────
+
+# 비교 기준 결정.
+#   초기 커밋 전에는 HEAD 가 없어 `git diff --cached` 가 아무것도 반환하지 않는다.
+#   이때는 "빈 트리" 해시를 기준으로 삼아야 첫 커밋도 정상적으로 검사된다.
+if git rev-parse --verify HEAD >/dev/null 2>&1; then
+  AGAINST=HEAD
+else
+  AGAINST=$(git hash-object -t tree /dev/null)
+fi
+
+# 1) 시크릿 스캔 — 포맷팅보다 먼저. API 키/토큰/개인키가 섞였다면 즉시 중단한다.
+STAGED_FILES=$(git diff --cached --name-only --diff-filter=ACMR "$AGAINST")
+if [ -n "$STAGED_FILES" ]; then
+  echo "$STAGED_FILES" | tr '\n' '\0' \
+    | xargs -0 npx --no -- secretlint --maskSecrets --secretlintignore .gitignore \
+    || {
+      echo ""
+      echo "❌ 커밋 중단: 스테이징된 파일에서 시크릿(키/토큰/비밀번호)이 감지되었습니다."
+      echo "   해당 값을 .env 로 옮기고 git restore --staged <파일> 후 다시 커밋하세요."
+      exit 1
+    }
+fi
+
+# 2) lint-staged — 각 파일에 가장 가까운 설정을 찾아 해당 디렉터리를 cwd 로 실행한다.
+#    (todo-frontend/.lintstagedrc.mjs → 프론트엔드 로컬 eslint/prettier 사용)
+npx --no -- lint-staged

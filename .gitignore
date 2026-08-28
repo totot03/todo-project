@@ -1,0 +1,74 @@
+# ─────────────────────────────────────────────
+# 루트 저장소 공통 무시 규칙
+#   - 이 프로젝트는 모노레포가 아니라 독립된 Git 저장소 3개다
+#   - todo-frontend / todo-backend 는 각자의 .git 과 .gitignore 를 가진다
+#   - 여기에는 "루트 저장소 전체에 해당하는 것"만 둔다
+# ─────────────────────────────────────────────
+
+# 중첩된 독립 저장소 — 루트 저장소는 이 둘을 추적하지 않는다
+#   각각 자체 .git 을 가지므로 무시하지 않으면 git status 에 통째로 노출되고,
+#   실수로 add 하면 임베디드 저장소(gitlink)로 잡혀 내용은 빠진 채 경로만 커밋된다
+todo-frontend/
+todo-backend/
+
+# Node
+node_modules/
+.npm/
+*.tsbuildinfo
+
+# husky 내부 구현 디렉터리 (husky 가 스스로 생성/관리)
+.husky/_/
+
+# 빌드 산출물
+dist/
+build/
+out/
+target/
+.next/
+
+# 로그
+*.log
+npm-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# 환경 변수 — 시크릿 유출 방지 (예시 파일만 커밋한다)
+.env
+.env.*
+!.env.example
+!.env.*.example
+*.pem
+*.key
+*.p12
+*.jks
+
+# IDE / 에디터
+# Eclipse(STS) 워크스페이스 메타데이터 — 수만 개 파일이 생성되므로 반드시 제외
+.metadata/
+.recommenders/
+.settings/
+.classpath
+.project
+.factorypath
+.springBeans
+.sts4-cache/
+.idea/
+*.iml
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Claude Code / MCP 로컬 상태
+.claude/settings.local.json
+.claude/local/
+shrimp_data/
+
+# 테스트 / 커버리지
+coverage/
+playwright-report/
+test-results/

@@ -1,0 +1,14 @@
+#!/usr/bin/env sh
+# ─────────────────────────────────────────────
+# pre-push — "원격 공유 직전" 방어선
+#   타입 오류는 파일 단위로 판정할 수 없다(다른 파일의 변경 때문에 깨질 수 있음).
+#   따라서 프로젝트 전체 타입 체크 + 린트는 커밋이 아니라 push 시점에 돌린다.
+#   급할 때는 git push --no-verify 로 우회할 수 있다.
+# ─────────────────────────────────────────────
+echo "▶ 타입 체크 (tsc --noEmit)"
+npm --prefix todo-frontend run typecheck || exit 1
+
+echo "▶ 린트 (eslint)"
+npm --prefix todo-frontend run lint || exit 1
+
+echo "✅ push 전 검사 통과"

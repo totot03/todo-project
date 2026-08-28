@@ -1,0 +1,34 @@
+# ─────────────────────────────────────────────
+# 줄바꿈 정규화
+#   Windows 개발 환경(core.autocrlf=true)에서도 저장소에는 항상 LF 로 저장한다.
+#   Prettier 의 endOfLine:"lf" 설정과 짝을 이루어,
+#   "포맷터가 고친 줄바꿈을 git 이 되돌리는" 무한 diff 를 막는다.
+# ─────────────────────────────────────────────
+
+# 기본: 텍스트로 판단되면 LF 로 정규화
+* text=auto eol=lf
+
+# 실행 스크립트는 반드시 LF (CRLF 이면 sh 가 실행 실패한다)
+*.sh        text eol=lf
+mvnw        text eol=lf
+.husky/*    text eol=lf
+
+# Windows 전용 스크립트는 CRLF 유지
+*.bat       text eol=crlf
+*.cmd       text eol=crlf
+mvnw.cmd    text eol=crlf
+
+# 바이너리 — diff/정규화 대상에서 제외
+*.png       binary
+*.jpg       binary
+*.jpeg      binary
+*.gif       binary
+*.ico       binary
+*.webp      binary
+*.woff      binary
+*.woff2     binary
+*.pdf       binary
+*.jar       binary
+
+# 자동 생성 파일 — GitHub diff 에서 접어둔다
+package-lock.json  linguist-generated=true -diff

@@ -1,0 +1,29 @@
+{
+  "name": "todo-project",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Todo 풀스택 모노레포 — Git 훅/커밋 검증/시크릿 스캔을 담당하는 툴링 허브",
+  "scripts": {
+    "prepare": "husky",
+    "lint": "npm --prefix todo-frontend run lint",
+    "lint:fix": "npm --prefix todo-frontend run lint:fix",
+    "format": "npm --prefix todo-frontend run format",
+    "format:check": "npm --prefix todo-frontend run format:check",
+    "typecheck": "npm --prefix todo-frontend run typecheck",
+    "check": "npm --prefix todo-frontend run check",
+    "secretlint": "secretlint --secretlintignore .gitignore \"**/*\"",
+    "be:verify": "todo-backend/mvnw.cmd -f todo-backend/pom.xml verify"
+  },
+  "engines": {
+    "node": ">=20.9.0"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^21.2.2",
+    "@commitlint/config-conventional": "^21.2.2",
+    "@secretlint/secretlint-rule-preset-recommend": "^13.0.5",
+    "husky": "^9.1.7",
+    "lint-staged": "^17.3.0",
+    "prettier": "^3.9.6",
+    "secretlint": "^13.0.5"
+  }
+}
