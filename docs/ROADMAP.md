@@ -125,17 +125,17 @@
 
 작업
 
-- [ ] BCryptPasswordEncoder 설정
-- [ ] `JwtTokenProvider` (생성·검증·파싱, 24h, 환경변수 시크릿)
-- [ ] `JwtAuthenticationFilter` (쿠키에서 토큰 추출)
-- [ ] `CustomUserDetailsService`
-- [ ] `SecurityConfig` (STATELESS, CSRF 비활성, 경로별 권한)
-- [ ] `CorsConfig` (localhost:3000, allowCredentials)
-- [ ] `POST /api/auth/signup` `/login` `/logout`, `GET /api/auth/me`
-- [ ] Request DTO Bean Validation
-- [ ] `ApiResponse<T>` 공통 응답 래퍼 (`API_SPEC.md` 1.3)
-- [ ] `ErrorCode`, `BusinessException`, `GlobalExceptionHandler` — 에러 코드는 `API_SPEC.md` 1.5 표를 그대로 사용
-- [ ] **springdoc-openapi 의존성 추가** + `SwaggerConfig` (`PRD.md` 1.3 — M2-A 도입)
+- [x] BCryptPasswordEncoder 설정
+- [x] `JwtTokenProvider` (생성·검증·파싱, 24h, 환경변수 시크릿)
+- [x] `JwtAuthenticationFilter` (쿠키에서 토큰 추출)
+- [x] `CustomUserDetailsService`
+- [x] `SecurityConfig` (STATELESS, CSRF 비활성, 경로별 권한)
+- [x] `CorsConfig` (localhost:3000, allowCredentials)
+- [x] `POST /api/auth/signup` `/login` `/logout`, `GET /api/auth/me`
+- [x] Request DTO Bean Validation
+- [x] `ApiResponse<T>` 공통 응답 래퍼 (`API_SPEC.md` 1.3)
+- [x] `ErrorCode`, `BusinessException`, `GlobalExceptionHandler` — 에러 코드는 `API_SPEC.md` 1.5 표를 그대로 사용
+- [x] **springdoc-openapi 의존성 추가** + `SwaggerConfig` (`PRD.md` 1.3 — M2-A 도입)
 
 **커버 요구사항**: FR-A01~~A07, FR-A10, FR-A11 / NFR-S01~~S04, S07, S08 / NFR-M02, M03
 
@@ -161,12 +161,12 @@
 
 작업
 
-- [ ] 구글 클라우드 콘솔 OAuth 클라이언트 생성, 리디렉션 URI 등록
-- [ ] `application.properties` google provider 설정 (scope: email, profile)
-- [ ] `CustomOAuth2UserService` — 조회 / 계정 연결 / 신규 생성
-- [ ] `OAuth2SuccessHandler` — 자체 JWT 쿠키 발급 후 프론트로 리다이렉트
-- [ ] `OAuth2FailureHandler` — 실패 시 `/login?error=oauth`
-- [ ] SecurityConfig에 OAuth 경로 permitAll
+- [x] 구글 클라우드 콘솔 OAuth 클라이언트 생성, 리디렉션 URI 등록
+- [x] `application.properties` google provider 설정 (scope: email, profile)
+- [x] `CustomOAuth2UserService` — 조회 / 계정 연결 / 신규 생성
+- [x] `OAuth2SuccessHandler` — 자체 JWT 쿠키 발급 후 프론트로 리다이렉트
+- [x] `OAuth2FailureHandler` — 실패 시 `/login?error=oauth`
+- [x] SecurityConfig에 OAuth 경로 permitAll
 
 **커버 요구사항**: FR-A08, FR-A09
 
@@ -427,17 +427,17 @@ M0 → M1 → M2-A ─┬─→ M2-B ─┐
 
 ## 9. 진행 현황
 
-| 마일스톤         | 상태    | 태그          | 비고                                                                                                             |
-| ---------------- | ------- | ------------- | ---------------------------------------------------------------------------------------------------------------- |
-| M0 스캐폴딩      | ✅ 완료 | `m0-scaffold` | DoD 전 항목 통과 (health 200, FE build/secretlint 통과, 자격증명 분리 완료)                                      |
-| M1 도메인        | ✅ 완료 |               | DoD 통과 (`./mvnw verify` 성공, schema.sql 부분 유니크·복합 인덱스 생성 확인). 커밋·`git tag m1-domain`은 미실행 |
-| M2-A 자체 JWT    | ☐ 대기  |               |                                                                                                                  |
-| M2-B 구글 OAuth2 | ☐ 대기  |               | 구글 콘솔 사전 준비 필요                                                                                         |
-| M3 Todo API      | ☐ 대기  |               | M2-B와 병행 가능                                                                                                 |
-| M4 프론트 기반   | ☐ 대기  |               |                                                                                                                  |
-| M5 화면 구현     | ☐ 대기  |               |                                                                                                                  |
-| M6 테스트·검증   | ☐ 대기  |               |                                                                                                                  |
-| **v1.0 릴리스**  | ☐       |               |                                                                                                                  |
-| v1.1 AWS 배포    | ☐ 대기  |               |                                                                                                                  |
+| 마일스톤         | 상태    | 태그               | 비고                                                                                                                                                                                            |
+| ---------------- | ------- | ------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| M0 스캐폴딩      | ✅ 완료 | `m0-scaffold`      | DoD 전 항목 통과 (health 200, FE build/secretlint 통과, 자격증명 분리 완료)                                                                                                                     |
+| M1 도메인        | ✅ 완료 |                    | DoD 통과 (`./mvnw verify` 성공, schema.sql 부분 유니크·복합 인덱스 생성 확인). 커밋·`git tag m1-domain`은 미실행                                                                                |
+| M2-A 자체 JWT    | ✅ 완료 | `m2a-jwt-auth`     | DoD 전 항목 curl 검증 통과(가입→로그인→me→로그아웃 후 401, 중복 이메일/짧은 비밀번호 에러 형식 일치, BCrypt 해시는 로그인 성공으로 간접 확인). `./mvnw verify` 성공. `git tag`·커밋은 별도 진행 |
+| M2-B 구글 OAuth2 | ✅ 완료 | `m2b-google-oauth` | DoD 전 항목 브라우저 검증 통과(구글 로그인→access_token 쿠키 발급→리다이렉트, 같은 이메일 LOCAL 계정 중복 생성 없이 연결, 동의 취소 시 `/login?error=oauth` 복귀). `./mvnw verify` 성공         |
+| M3 Todo API      | ☐ 대기  |                    | M2-B와 병행 가능                                                                                                                                                                                |
+| M4 프론트 기반   | ☐ 대기  |                    |                                                                                                                                                                                                 |
+| M5 화면 구현     | ☐ 대기  |                    |                                                                                                                                                                                                 |
+| M6 테스트·검증   | ☐ 대기  |                    |                                                                                                                                                                                                 |
+| **v1.0 릴리스**  | ☐       |                    |                                                                                                                                                                                                 |
+| v1.1 AWS 배포    | ☐ 대기  |                    |                                                                                                                                                                                                 |
 
 > 마일스톤을 끝낼 때마다 이 표를 갱신한다.
