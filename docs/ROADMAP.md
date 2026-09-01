@@ -219,17 +219,17 @@
 
 작업
 
-- [ ] **패키지 설치**: `@tanstack/react-query`, `next-themes` (`PRD.md` 1.3 — M4 도입)
-- [ ] `types/api.ts` — `ApiResponse<T>` · `PageResponse<T>` · Todo/User DTO (`API_SPEC.md` 1.3~1.4)
-- [ ] `lib/api/client.ts` — fetch 래퍼. **`credentials: "include"` 만으로 인증이 끝난다.**
+- [x] **패키지 설치**: `@tanstack/react-query`, `next-themes` (`PRD.md` 1.3 — M4 도입)
+- [x] `types/api.ts` — `ApiResponse<T>` · `PageResponse<T>` · Todo/User DTO (`API_SPEC.md` 1.3~1.4)
+- [x] `lib/api/client.ts` — fetch 래퍼. **`credentials: "include"` 만으로 인증이 끝난다.**
       토큰을 저장·조회·첨부하는 코드를 두지 않는다 (FR-A06 / NFR-S02)
-- [ ] `lib/api/auth.ts`, `lib/api/todos.ts` — 파일명은 **복수형 `todos.ts`** 로 통일
-- [ ] `providers/QueryProvider.tsx` — React Query Provider
-- [ ] `providers/ThemeProvider.tsx` — next-themes + 라이트/다크 팔레트 CSS 변수 정의
-- [ ] `components/layout/Header.tsx`, `components/layout/ThemeToggle.tsx`
-- [ ] **`components/common/Pagination.tsx`** — 직접 구현, 번호 축약 (FR-U06)
-- [ ] `components/common/` — `LoadingSpinner`, `ErrorMessage`(재시도), `EmptyState`
-- [ ] `proxy.ts` — 쿠키 기반 `/todos` 라우트 보호
+- [x] `lib/api/auth.ts`, `lib/api/todos.ts` — 파일명은 **복수형 `todos.ts`** 로 통일
+- [x] `providers/QueryProvider.tsx` — React Query Provider
+- [x] `providers/ThemeProvider.tsx` — next-themes + 라이트/다크 팔레트 CSS 변수 정의
+- [x] `components/layout/Header.tsx`, `components/layout/ThemeToggle.tsx`
+- [x] **`components/common/Pagination.tsx`** — 직접 구현, 번호 축약 (FR-U06)
+- [x] `components/common/` — `LoadingSpinner`, `ErrorMessage`(재시도), `EmptyState`
+- [x] `proxy.ts` — 쿠키 기반 `/todos` 라우트 보호
       (Next.js 16에서 `middleware.ts` → `proxy.ts` 로 개명, `guides/nextjs-16.md` 참조)
 
 **커버 요구사항**: FR-U01, FR-U06, FR-A10(프론트) / NFR-U02, U04 / NFR-M05
@@ -427,17 +427,17 @@ M0 → M1 → M2-A ─┬─→ M2-B ─┐
 
 ## 9. 진행 현황
 
-| 마일스톤         | 상태    | 태그               | 비고                                                                                                                                                                                                            |
-| ---------------- | ------- | ------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| M0 스캐폴딩      | ✅ 완료 | `m0-scaffold`      | DoD 전 항목 통과 (health 200, FE build/secretlint 통과, 자격증명 분리 완료)                                                                                                                                     |
-| M1 도메인        | ✅ 완료 |                    | DoD 통과 (`./mvnw verify` 성공, schema.sql 부분 유니크·복합 인덱스 생성 확인). 커밋·`git tag m1-domain`은 미실행                                                                                                |
-| M2-A 자체 JWT    | ✅ 완료 | `m2a-jwt-auth`     | DoD 전 항목 curl 검증 통과(가입→로그인→me→로그아웃 후 401, 중복 이메일/짧은 비밀번호 에러 형식 일치, BCrypt 해시는 로그인 성공으로 간접 확인). `./mvnw verify` 성공. `git tag`·커밋은 별도 진행                 |
-| M2-B 구글 OAuth2 | ✅ 완료 | `m2b-google-oauth` | DoD 전 항목 브라우저 검증 통과(구글 로그인→access_token 쿠키 발급→리다이렉트, 같은 이메일 LOCAL 계정 중복 생성 없이 연결, 동의 취소 시 `/login?error=oauth` 복귀). `./mvnw verify` 성공                         |
-| M3 Todo API      | ✅ 완료 | `m3-todo-api`      | DoD 전 항목 curl 검증 통과(생성 시 `<script>` sanitize 제거, 목록 페이지네이션/completed 필터/keyword 검색, 수정·토글·삭제, 삭제 후 404 및 목록 제외, 타 사용자 접근 시 404). `./mvnw verify` 성공(테스트 50개) |
-| M4 프론트 기반   | ☐ 대기  |                    |                                                                                                                                                                                                                 |
-| M5 화면 구현     | ☐ 대기  |                    |                                                                                                                                                                                                                 |
-| M6 테스트·검증   | ☐ 대기  |                    |                                                                                                                                                                                                                 |
-| **v1.0 릴리스**  | ☐       |                    |                                                                                                                                                                                                                 |
-| v1.1 AWS 배포    | ☐ 대기  |                    |                                                                                                                                                                                                                 |
+| 마일스톤         | 상태    | 태그               | 비고                                                                                                                                                                                                                                                            |
+| ---------------- | ------- | ------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| M0 스캐폴딩      | ✅ 완료 | `m0-scaffold`      | DoD 전 항목 통과 (health 200, FE build/secretlint 통과, 자격증명 분리 완료)                                                                                                                                                                                     |
+| M1 도메인        | ✅ 완료 |                    | DoD 통과 (`./mvnw verify` 성공, schema.sql 부분 유니크·복합 인덱스 생성 확인). 커밋·`git tag m1-domain`은 미실행                                                                                                                                                |
+| M2-A 자체 JWT    | ✅ 완료 | `m2a-jwt-auth`     | DoD 전 항목 curl 검증 통과(가입→로그인→me→로그아웃 후 401, 중복 이메일/짧은 비밀번호 에러 형식 일치, BCrypt 해시는 로그인 성공으로 간접 확인). `./mvnw verify` 성공. `git tag`·커밋은 별도 진행                                                                 |
+| M2-B 구글 OAuth2 | ✅ 완료 | `m2b-google-oauth` | DoD 전 항목 브라우저 검증 통과(구글 로그인→access_token 쿠키 발급→리다이렉트, 같은 이메일 LOCAL 계정 중복 생성 없이 연결, 동의 취소 시 `/login?error=oauth` 복귀). `./mvnw verify` 성공                                                                         |
+| M3 Todo API      | ✅ 완료 | `m3-todo-api`      | DoD 전 항목 curl 검증 통과(생성 시 `<script>` sanitize 제거, 목록 페이지네이션/completed 필터/keyword 검색, 수정·토글·삭제, 삭제 후 404 및 목록 제외, 타 사용자 접근 시 404). `./mvnw verify` 성공(테스트 50개)                                                 |
+| M4 프론트 기반   | ✅ 완료 | `m4-frontend-base` | DoD 전 항목 통과(`tsc --noEmit`·`lint:strict`·`format:check`·`build`). Playwright로 실브라우저 검증 — 테마 토글 클릭 시 `light`↔`dark` 전환 및 새로고침 후 유지, `proxy.ts`가 쿠키 없는 `/todos` 접근을 `/login`으로 리다이렉트하고 쿠키 있으면 통과시킴을 확인 |
+| M5 화면 구현     | ☐ 대기  |                    |                                                                                                                                                                                                                                                                 |
+| M6 테스트·검증   | ☐ 대기  |                    |                                                                                                                                                                                                                                                                 |
+| **v1.0 릴리스**  | ☐       |                    |                                                                                                                                                                                                                                                                 |
+| v1.1 AWS 배포    | ☐ 대기  |                    |                                                                                                                                                                                                                                                                 |
 
 > 마일스톤을 끝낼 때마다 이 표를 갱신한다.
