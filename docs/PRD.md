@@ -57,8 +57,8 @@
 | 프론트 | Tailwind CSS                           | 4.x        | 설치됨                                        |
 | 프론트 | shadcn/ui (`shadcn` + `radix-ui`)      | 4.19 / 1.6 | 설치됨                                        |
 | 프론트 | lucide-react                           | 1.34       | 설치됨                                        |
-| 프론트 | TanStack Query (React Query)           | -          | **미설치 — M4 도입**                          |
-| 프론트 | next-themes                            | -          | **미설치 — M4 도입**                          |
+| 프론트 | TanStack Query (React Query)           | 5.102      | 설치됨                                        |
+| 프론트 | next-themes                            | 0.4        | 설치됨                                        |
 | 프론트 | React Hook Form + Zod                  | -          | **미설치 — M5 도입**                          |
 | 프론트 | Tiptap                                 | -          | **미설치 — M5 도입**                          |
 | 프론트 | Framer Motion (`motion`)               | -          | **미설치 — M5 도입**                          |
