@@ -38,33 +38,33 @@
 **설치 상태**는 실제 `todo-backend/pom.xml` · `todo-frontend/package.json` 기준이다.
 아직 설치되지 않은 항목은 해당 마일스톤에서 도입하며, 도입 시 이 표를 갱신한다.
 
-| 영역   | 기술                                   | 버전       | 설치 상태                                     |
-| ------ | -------------------------------------- | ---------- | --------------------------------------------- |
-| 백엔드 | Spring Boot                            | 4.1.1      | 설치됨                                        |
-| 백엔드 | JDK                                    | 21         | 설치됨                                        |
-| 백엔드 | Maven (Wrapper)                        | -          | 설치됨                                        |
-| 백엔드 | Spring Data JPA / Hibernate            | -          | 설치됨                                        |
-| 백엔드 | Spring Security                        | -          | 설치됨                                        |
-| 백엔드 | Spring Security OAuth2 Client          | -          | 설치됨                                        |
-| 백엔드 | Bean Validation                        | -          | 설치됨                                        |
-| 백엔드 | jjwt (JWT 라이브러리)                  | 0.12.6     | 설치됨                                        |
-| 백엔드 | Lombok                                 | -          | 설치됨                                        |
-| 백엔드 | jsoup (HTML sanitize)                  | 1.18.3     | 설치됨                                        |
-| 백엔드 | springdoc-openapi (Swagger)            | 3.1.0      | 설치됨                                        |
-| 프론트 | Next.js (App Router)                   | 16.3.3     | 설치됨                                        |
-| 프론트 | React                                  | 19.2.8     | 설치됨                                        |
-| 프론트 | TypeScript                             | 5.x        | 설치됨                                        |
-| 프론트 | Tailwind CSS                           | 4.x        | 설치됨                                        |
-| 프론트 | shadcn/ui (`shadcn` + `radix-ui`)      | 4.19 / 1.6 | 설치됨                                        |
-| 프론트 | lucide-react                           | 1.34       | 설치됨                                        |
-| 프론트 | TanStack Query (React Query)           | 5.102      | 설치됨                                        |
-| 프론트 | next-themes                            | 0.4        | 설치됨                                        |
-| 프론트 | React Hook Form + Zod                  | 7.87 / 4.5 | 설치됨                                        |
-| 프론트 | Tiptap                                 | 3.30       | 설치됨                                        |
-| 프론트 | Framer Motion (`motion`)               | 13.1       | 설치됨                                        |
-| DB     | PostgreSQL                             | -          | 데이터베이스 `postgres`, 스키마 `todolist_db` |
-| 품질   | ESLint · Prettier · secretlint · husky | -          | 설치됨 (`DEV_TOOLING.md`)                     |
-| 품질   | Spotless (google-java-format AOSP)     | -          | 설치됨 (`DEV_TOOLING.md`)                     |
+| 영역   | 기술                                   | 버전       | 설치 상태                                                                                                                                                                                   |
+| ------ | -------------------------------------- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 백엔드 | Spring Boot                            | 4.1.1      | 설치됨                                                                                                                                                                                      |
+| 백엔드 | JDK                                    | 21         | 설치됨                                                                                                                                                                                      |
+| 백엔드 | Maven (Wrapper)                        | -          | 설치됨                                                                                                                                                                                      |
+| 백엔드 | Spring Data JPA / Hibernate            | -          | 설치됨                                                                                                                                                                                      |
+| 백엔드 | Spring Security                        | -          | 설치됨                                                                                                                                                                                      |
+| 백엔드 | Spring Security OAuth2 Client          | -          | 설치됨                                                                                                                                                                                      |
+| 백엔드 | Bean Validation                        | -          | 설치됨                                                                                                                                                                                      |
+| 백엔드 | jjwt (JWT 라이브러리)                  | 0.12.6     | 설치됨                                                                                                                                                                                      |
+| 백엔드 | Lombok                                 | -          | 설치됨                                                                                                                                                                                      |
+| 백엔드 | jsoup (HTML sanitize)                  | 1.18.3     | 설치됨                                                                                                                                                                                      |
+| 백엔드 | springdoc-openapi (Swagger)            | 3.1.0      | 설치됨                                                                                                                                                                                      |
+| 프론트 | Next.js (App Router)                   | 16.3.3     | 설치됨                                                                                                                                                                                      |
+| 프론트 | React                                  | 19.2.8     | 설치됨                                                                                                                                                                                      |
+| 프론트 | TypeScript                             | 5.x        | 설치됨                                                                                                                                                                                      |
+| 프론트 | Tailwind CSS                           | 4.x        | 설치됨                                                                                                                                                                                      |
+| 프론트 | shadcn/ui (`shadcn` + `radix-ui`)      | 4.19 / 1.6 | 설치됨                                                                                                                                                                                      |
+| 프론트 | lucide-react                           | 1.34       | 설치됨                                                                                                                                                                                      |
+| 프론트 | TanStack Query (React Query)           | 5.102      | 설치됨                                                                                                                                                                                      |
+| 프론트 | 다크모드 (자체 구현)                   | -          | 설치됨 — `providers/ThemeProvider.tsx`. next-themes 0.4는 React 19의 "script 태그 경고"(pacocoursey/next-themes#385) 문제로 M6에서 제거하고 `useServerInsertedHTML` 기반 자체 구현으로 교체 |
+| 프론트 | React Hook Form + Zod                  | 7.87 / 4.5 | 설치됨                                                                                                                                                                                      |
+| 프론트 | Tiptap                                 | 3.30       | 설치됨                                                                                                                                                                                      |
+| 프론트 | Framer Motion (`motion`)               | 13.1       | 설치됨                                                                                                                                                                                      |
+| DB     | PostgreSQL                             | -          | 데이터베이스 `postgres`, 스키마 `todolist_db`                                                                                                                                               |
+| 품질   | ESLint · Prettier · secretlint · husky | -          | 설치됨 (`DEV_TOOLING.md`)                                                                                                                                                                   |
+| 품질   | Spotless (google-java-format AOSP)     | -          | 설치됨 (`DEV_TOOLING.md`)                                                                                                                                                                   |
 
 > **저장소 구조**: 모노레포가 아니라 **독립된 Git 저장소 3개**다 (루트 문서 / `todo-frontend` / `todo-backend`).
 > 자세한 내용은 `DEV_TOOLING.md` 1장을 따른다.
@@ -548,18 +548,18 @@ PostgreSQL은 따옴표 없는 식별자를 소문자로 접기 때문에, `Todo
 
 ## 13. 미결정 사항 / 리스크
 
-| ID         | 내용                                                          | 영향                                                                                                                                                                                                                          | 결정 시점      |
-| ---------- | ------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------- |
-| OQ-1       | 배포 시 프론트·백엔드 도메인 구성                             | httpOnly 쿠키를 쓰므로 상위 도메인이 다르면 `SameSite=None; Secure` 처리가 필요해진다. 같은 상위 도메인 사용을 권장                                                                                                           | 배포 단계      |
-| OQ-2       | 24시간 만료 후 재로그인 UX                                    | 작업 중 만료되면 입력 내용이 날아갈 수 있다. 필요 시 만료 임박 안내 검토                                                                                                                                                      | M5 이후        |
-| OQ-3       | 회원 탈퇴 기능                                                | 스키마만 준비. 화면 제공 여부 미정 (FR-A12 검증 방식과 연결)                                                                                                                                                                  | 2차            |
-| OQ-4       | 상세 설명 이미지 첨부                                         | S3 연동 필요. 현재 범위 밖                                                                                                                                                                                                    | 2차            |
-| RISK-1     | Spring Boot 4 / Next.js 16 / Tailwind 4 모두 최근 메이저 버전 | 학습된 예제 코드와 실제 API가 다를 수 있다. 각 단계에서 반드시 실제 빌드로 검증                                                                                                                                               | 상시           |
-| RISK-2     | Tiptap의 SSR 렌더링 이슈                                      | 클라이언트 전용 렌더링(`immediatelyRender: false`)으로 회피                                                                                                                                                                   | M5             |
-| RISK-3     | `application.properties`에 DB 비밀번호가 평문으로 들어 있음   | **NFR-S03 위반 상태.** `.gitignore`는 `application-local.*`만 제외하므로 현 상태로 커밋하면 자격증명이 유출된다. 로컬 설정 파일로 분리 후 `.gitignore` 처리 필요                                                              | **즉시**       |
-| RISK-4     | 백엔드 설정의 스키마명 표기가 3가지로 갈림                    | 주석 `TodoListDB` / `currentSchema=Todolist_db` / `default_schema=todolist_db`. PostgreSQL의 식별자 소문자 접기 규칙과 맞물려 런타임 스키마 미탐색 오류를 낼 수 있다. 8.3 표기 규칙으로 통일                                  | **M1 착수 전** |
-| ~~RISK-5~~ | ~~`docs/guides/` 의 인증 예시가 이 PRD와 모순~~               | **해소 (2026-08-28).** `saveToken()`·`lib/auth/token.ts`·"토큰 유무로 리다이렉트"·"JWT 자동첨부"를 전부 쿠키 방식으로 교체하고, `forms-react-hook-form.md` 서두에 "토큰을 저장하는 코드를 절대 쓰지 않는다" 규칙을 명문화했다 | ~~M4 착수 전~~ |
-| ~~RISK-6~~ | ~~`ROADMAP.md` 기재가 실제 구성과 어긋남~~                    | **해소 (2026-08-28).** Spring Boot 4.1.1, `application.properties`, M5 화면 7개(별도 페이지) 로 정정. 없는 `CLAUDE.md`·`PHASE_PROMPTS.md` 참조도 실존 문서로 교체                                                             | ~~M0 착수 전~~ |
+| ID         | 내용                                                            | 영향                                                                                                                                                                                                                                                                                                      | 결정 시점      |
+| ---------- | --------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------- |
+| OQ-1       | 배포 시 프론트·백엔드 도메인 구성                               | httpOnly 쿠키를 쓰므로 상위 도메인이 다르면 `SameSite=None; Secure` 처리가 필요해진다. 같은 상위 도메인 사용을 권장                                                                                                                                                                                       | 배포 단계      |
+| OQ-2       | 24시간 만료 후 재로그인 UX                                      | 작업 중 만료되면 입력 내용이 날아갈 수 있다. 필요 시 만료 임박 안내 검토                                                                                                                                                                                                                                  | M5 이후        |
+| OQ-3       | 회원 탈퇴 기능                                                  | 스키마만 준비. 화면 제공 여부 미정 (FR-A12 검증 방식과 연결)                                                                                                                                                                                                                                              | 2차            |
+| OQ-4       | 상세 설명 이미지 첨부                                           | S3 연동 필요. 현재 범위 밖                                                                                                                                                                                                                                                                                | 2차            |
+| RISK-1     | Spring Boot 4 / Next.js 16 / Tailwind 4 모두 최근 메이저 버전   | 학습된 예제 코드와 실제 API가 다를 수 있다. 각 단계에서 반드시 실제 빌드로 검증                                                                                                                                                                                                                           | 상시           |
+| RISK-2     | Tiptap의 SSR 렌더링 이슈                                        | 클라이언트 전용 렌더링(`immediatelyRender: false`)으로 회피                                                                                                                                                                                                                                               | M5             |
+| ~~RISK-3~~ | ~~`application.properties`에 DB 비밀번호가 평문으로 들어 있음~~ | **해소 (2026-09-02, M6에서 재확인).** `git log --follow`로 전체 이력을 확인한 결과 `spring.datasource.password`는 최초 커밋(M0)부터 항상 `${DB_PASSWORD}` 환경변수 참조였고, 평문 값이 커밋된 적이 없다. 실제 비밀번호는 gitignore된 `application-local.properties`에만 있으며 이 파일도 커밋 이력이 없다 | ~~즉시~~       |
+| RISK-4     | 백엔드 설정의 스키마명 표기가 3가지로 갈림                      | 주석 `TodoListDB` / `currentSchema=Todolist_db` / `default_schema=todolist_db`. PostgreSQL의 식별자 소문자 접기 규칙과 맞물려 런타임 스키마 미탐색 오류를 낼 수 있다. 8.3 표기 규칙으로 통일                                                                                                              | **M1 착수 전** |
+| ~~RISK-5~~ | ~~`docs/guides/` 의 인증 예시가 이 PRD와 모순~~                 | **해소 (2026-08-28).** `saveToken()`·`lib/auth/token.ts`·"토큰 유무로 리다이렉트"·"JWT 자동첨부"를 전부 쿠키 방식으로 교체하고, `forms-react-hook-form.md` 서두에 "토큰을 저장하는 코드를 절대 쓰지 않는다" 규칙을 명문화했다                                                                             | ~~M4 착수 전~~ |
+| ~~RISK-6~~ | ~~`ROADMAP.md` 기재가 실제 구성과 어긋남~~                      | **해소 (2026-08-28).** Spring Boot 4.1.1, `application.properties`, M5 화면 7개(별도 페이지) 로 정정. 없는 `CLAUDE.md`·`PHASE_PROMPTS.md` 참조도 실존 문서로 교체                                                                                                                                         | ~~M0 착수 전~~ |
 
 ---
 

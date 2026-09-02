@@ -126,10 +126,10 @@ ESLint 플랫 설정에서 `eslint-config-prettier`는 **반드시 배열 마지
 ## 함정
 
 - **DB 스키마명은 전체 소문자 `todolist_db`.** PostgreSQL이 따옴표 없는 식별자를 소문자로 접기 때문에 `TodoListDB`로 적으면 설정과 실제 스키마가 어긋난다. 데이터베이스는 `postgres`, 테스트 스키마는 `todolist_test_db`
-- **`todo-backend/src/main/resources/application.properties`에 평문 DB 비밀번호가 있다.** `.gitignore`는 `application-local.*`만 제외하므로 현재 상태로 커밋하면 유출된다. 백엔드 시크릿 grep은 8자 이상만 잡아 이 값을 통과시킨다 (`docs/PRD.md` RISK-3, 우선순위 "즉시")
+- **`todo-backend/src/main/resources/application.properties`에는 평문 비밀번호가 없다.** `spring.datasource.password`·`jwt.secret`·구글 client-secret 모두 `${DB_PASSWORD}` 같은 환경변수 참조뿐이고, 최초 커밋(M0)부터 계속 그래왔다. 실제 값은 `.gitignore`가 제외하는 `application-local.properties`에만 있고 이 파일은 커밋 이력이 없다 (`docs/PRD.md` RISK-3, 2026-09-02 M6에서 해소 확인)
 - **Flyway/Liquibase가 없다.** 스키마는 `spring.jpa.hibernate.ddl-auto=update`로 만들어진다. 마이그레이션 파일을 찾지 말 것
 - **Spring Boot 4에서 `spring-boot-starter-web`이 `-webmvc`로 이름이 바뀌었다.** 테스트 스타터도 `spring-boot-starter-<모듈>-test` 형태다
-- **`docs/PRD.md` §1.3의 "설치 상태" 열을 먼저 확인한다.** TanStack Query·next-themes·React Hook Form·Zod·Tiptap·Framer Motion·jsoup·springdoc은 **아직 설치되지 않았다.** 미설치 라이브러리를 import하지 않는다 (과거 에이전트가 설치 여부를 환각한 이력이 있어 이 열이 생겼다)
+- **`docs/PRD.md` §1.3의 "설치 상태" 열을 먼저 확인한다.** 미설치 라이브러리를 import하지 않는다 (과거 에이전트가 설치 여부를 환각한 이력이 있어 이 열이 생겼다). TanStack Query·React Hook Form·Zod·Tiptap·Framer Motion·jsoup·springdoc은 모두 설치돼 있다. **next-themes는 M6에서 제거됐다** — React 19가 next-themes의 FOUC 방지 스크립트를 컴포넌트 트리 안 엘리먼트로 인식해 경고를 내는 문제 때문에 `providers/ThemeProvider.tsx`의 `useServerInsertedHTML` 기반 자체 구현으로 교체했다. `import { useTheme } from "next-themes"`가 아니라 `import { useTheme } from "@/providers/ThemeProvider"`를 쓸 것
 - **`todo-frontend/AGENTS.md`는 `next dev`가 자동 생성·복원한다.** diff에서 지워도 다시 생기므로 작업물과 함께 커밋한다. `todo-frontend/CLAUDE.md`는 이 파일을 `@AGENTS.md`로 불러오는 한 줄짜리다
 - 포트: 백엔드 8080, 프론트엔드 3000
 - `CLAUDE_HOOK_ESLINT=1`을 설정하면 편집 시 포맷 훅이 `eslint --fix`까지 돌린다. ESLint 기동이 4초 넘어 기본은 꺼져 있다

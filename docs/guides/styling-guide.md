@@ -13,10 +13,10 @@
 - **shadcn/ui**: Radix UI 기반 컴포넌트 라이브러리 — ✅ 설치됨. style은 **`radix-nova`**, baseColor는 `neutral` (`components.json` 기준. new-york 아님)
 - **tw-animate-css**: 애니메이션 라이브러리 — ✅ 설치됨
 - **CSS Variables**: 동적 테마 시스템
-- **next-themes**: 다크모드 지원 — ⏳ **미설치. ROADMAP M4에서 설치** (`PRD.md` 1.3)
+- **다크모드**: `providers/ThemeProvider.tsx`의 자체 구현 — ✅ 설치됨. M4에서 next-themes 0.4를 도입했으나, React 19가 next-themes의 FOUC 방지 `<script>`를 컴포넌트 트리 안의 엘리먼트로 인식해 "Encountered a script tag while rendering React component" 경고를 내는 문제(pacocoursey/next-themes#385·#387)가 있어 M6에서 `useServerInsertedHTML` 기반 자체 구현으로 교체했다 (`PRD.md` 1.3)
 - **prettier-plugin-tailwindcss**: 자동 클래스 정렬 — ✅ 설치됨 (`todo-frontend/prettier.config.mjs` 의 `plugins` 에 등록됨)
 
-> 아래 `next-themes` 예시는 M4에서 설치한 뒤 적용한다. 테마 기본값은 시스템 설정이다 (`PRD.md` FR-U01).
+> 아래 다크모드 예시는 `providers/ThemeProvider.tsx`를 그대로 발췌한 것이다. 테마 기본값은 시스템 설정이다 (`PRD.md` FR-U01).
 
 ## 🚀 TailwindCSS v4 사용 규칙
 
@@ -183,45 +183,60 @@ npx shadcn@latest add
 
 ## 🌓 다크모드 구현
 
-### next-themes 활용
+### 자체 ThemeProvider (next-themes 대체)
+
+next-themes는 하이드레이션 전에 실행되는 FOUC 방지 `<script>`를 일반 React 엘리먼트로 렌더링하는데,
+React 19가 이를 "컴포넌트 안에서 렌더링된 script는 클라이언트에서 실행되지 않는다"고 매번 경고한다
+(next-themes는 2025-03 이후 업데이트가 없어 라이브러리 차원 수정을 기대하기 어렵다). 대신 같은
+스크립트를 `next/navigation`의 `useServerInsertedHTML`로 서버 렌더링 스트림에 직접 삽입한다 —
+이 경로는 일반 클라이언트 렌더 트리를 타지 않으므로 저 경고가 발생하지 않는다.
+
+핵심 아이디어만 발췌(전문은 `providers/ThemeProvider.tsx` 참고, 파일명은 PascalCase — guides/project-structure.md):
 
 ```tsx
-// providers/ThemeProvider.tsx  (파일명은 PascalCase — guides/project-structure.md)
-import { ThemeProvider as NextThemesProvider } from "next-themes";
+// providers/ThemeProvider.tsx
+"use client";
+import { useServerInsertedHTML } from "next/navigation";
 
-export function ThemeProvider({ children, ...props }) {
-  return (
-    <NextThemesProvider
-      attribute="class"
-      defaultTheme="system"
-      enableSystem
-      disableTransitionOnChange
-      {...props}
-    >
-      {children}
-    </NextThemesProvider>
-  );
+// localStorage에서 테마를 읽어 하이드레이션 전에 동기적으로 <html>에 dark 클래스를 적용한다.
+const THEME_INIT_SCRIPT = `(function(){ /* localStorage → <html class="dark"> 즉시 반영 */ })();`;
+
+export function ThemeProvider({ children }: { children: ReactNode }) {
+  useServerInsertedHTML(() => <script dangerouslySetInnerHTML={{ __html: THEME_INIT_SCRIPT }} />);
+
+  // useState의 lazy initializer로 최초 렌더 시 한 번만 localStorage를 읽는다.
+  // 마운트 useEffect에서 setState를 동기 호출하면 캐스케이딩 렌더가 생긴다는
+  // react-hooks/set-state-in-effect 경고를 피하기 위함 (아래 테마 토글 주석도 참고).
+  const [theme, setThemeState] = useState<Theme>(getInitialTheme);
+  // ... Context Provider로 { theme, resolvedTheme, setTheme } 제공
+}
+
+export function useTheme() {
+  /* Context 값을 반환, ThemeProvider 밖에서 쓰면 throw */
 }
 ```
 
 ### 테마 토글 컴포넌트
 
 ```tsx
-import { useTheme } from "next-themes";
 import { Moon, Sun } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useTheme } from "@/providers/ThemeProvider";
 
+// resolvedTheme으로 아이콘을 조건부 렌더링하면 서버는 시스템 설정을 몰라 하이드레이션
+// 전/후 마크업이 달라진다. Tailwind의 dark: variant로 두 아이콘을 항상 렌더링해두고
+// CSS만으로 전환하면 이 문제 자체가 생기지 않는다.
 export function ThemeToggle() {
-  const { theme, setTheme } = useTheme();
+  const { resolvedTheme, setTheme } = useTheme();
 
   return (
     <Button
       variant="outline"
       size="icon"
-      onClick={() => setTheme(theme === "light" ? "dark" : "light")}
+      onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
     >
-      <Sun className="h-4 w-4 scale-100 rotate-0 transition-all dark:scale-0 dark:-rotate-90" />
-      <Moon className="absolute h-4 w-4 scale-0 rotate-90 transition-all dark:scale-100 dark:rotate-0" />
+      <Sun className="dark:hidden" />
+      <Moon className="hidden dark:block" />
       <span className="sr-only">테마 전환</span>
     </Button>
   );
