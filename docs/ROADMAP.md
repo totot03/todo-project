@@ -295,23 +295,26 @@
 
 작업
 
-- [ ] `application-test.properties` (스키마 `todolist_test_db`, `create-drop`)
-- [ ] 회원가입 성공 / 중복 / 형식 오류 / 짧은 비밀번호
-- [ ] 로그인 성공 시 쿠키 발급 / 비밀번호 불일치
-- [ ] 토큰 없이 `/api/todos` → 401
-- [ ] Todo CRUD 전 과정
-- [ ] 페이지네이션 (총 건수·페이지 크기·정렬)
-- [ ] Soft Delete 후 목록 제외 + `deleted_at` 확인
-- [ ] **타 사용자 Todo 접근 시 404** (FR-T13)
-- [ ] **탈퇴(soft delete) 이메일로 재가입 가능** — 탈퇴 UI가 없으므로 DB 직접 조작으로만 검증 (FR-A12)
-- [ ] description `<script>` 제거 확인 (NFR-S05)
-- [ ] `PRD.md` 12장 체크리스트 전수 확인
+- [x] `application-test.properties` (스키마 `todolist_test_db`, `create-drop`)
+- [x] 회원가입 성공 / 중복 / 형식 오류 / 짧은 비밀번호
+- [x] 로그인 성공 시 쿠키 발급 / 비밀번호 불일치
+- [x] 토큰 없이 `/api/todos` → 401
+- [x] Todo CRUD 전 과정
+- [x] 페이지네이션 (총 건수·페이지 크기·정렬)
+- [x] Soft Delete 후 목록 제외 + `deleted_at` 확인
+- [x] **타 사용자 Todo 접근 시 404** (FR-T13)
+- [x] **탈퇴(soft delete) 이메일로 재가입 가능** — 탈퇴 UI가 없으므로 DB 직접 조작으로만 검증 (FR-A12)
+- [x] description `<script>` 제거 확인 (NFR-S05)
+- [x] `PRD.md` 12장 체크리스트 전수 확인
+
+> 위 항목은 `AuthControllerTest`·`TodoControllerTest` MockMvc 통합 테스트로 검증했다(CI에서 53개 테스트 전부 통과).
+> 진행 중 CI가 두 저장소 모두 선행 결함(`mvnw` 실행 비트 누락, `next typegen` 미실행)으로 매번 실패 중이던 것을 발견해 함께 고쳤다.
 
 **완료 조건 (DoD)**
 
-- `./mvnw verify` 전체 통과 (Spotless 포맷 검사 + 컴파일 + 테스트)
-- `npm run check` 통과
-- `PRD.md` 12장 릴리스 판정 체크리스트 전 항목 체크
+- [x] `./mvnw verify` 전체 통과 (Spotless 포맷 검사 + 컴파일 + 테스트) — CI 확인
+- [x] `npm run check` 통과
+- [x] `PRD.md` 12장 릴리스 판정 체크리스트 전 항목 체크
 
 **체크포인트**: `git tag v1.0.0`
 

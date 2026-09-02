@@ -49,8 +49,8 @@
 | 백엔드 | Bean Validation                        | -          | 설치됨                                        |
 | 백엔드 | jjwt (JWT 라이브러리)                  | 0.12.6     | 설치됨                                        |
 | 백엔드 | Lombok                                 | -          | 설치됨                                        |
-| 백엔드 | jsoup (HTML sanitize)                  | -          | 미설치 — M3 도입                              |
-| 백엔드 | springdoc-openapi (Swagger)            | -          | 미설치 — M2-A 도입                            |
+| 백엔드 | jsoup (HTML sanitize)                  | 1.18.3     | 설치됨                                        |
+| 백엔드 | springdoc-openapi (Swagger)            | 3.1.0      | 설치됨                                        |
 | 프론트 | Next.js (App Router)                   | 16.3.3     | 설치됨                                        |
 | 프론트 | React                                  | 19.2.8     | 설치됨                                        |
 | 프론트 | TypeScript                             | 5.x        | 설치됨                                        |
@@ -59,9 +59,9 @@
 | 프론트 | lucide-react                           | 1.34       | 설치됨                                        |
 | 프론트 | TanStack Query (React Query)           | 5.102      | 설치됨                                        |
 | 프론트 | next-themes                            | 0.4        | 설치됨                                        |
-| 프론트 | React Hook Form + Zod                  | -          | **미설치 — M5 도입**                          |
-| 프론트 | Tiptap                                 | -          | **미설치 — M5 도입**                          |
-| 프론트 | Framer Motion (`motion`)               | -          | **미설치 — M5 도입**                          |
+| 프론트 | React Hook Form + Zod                  | 7.87 / 4.5 | 설치됨                                        |
+| 프론트 | Tiptap                                 | 3.30       | 설치됨                                        |
+| 프론트 | Framer Motion (`motion`)               | 13.1       | 설치됨                                        |
 | DB     | PostgreSQL                             | -          | 데이터베이스 `postgres`, 스키마 `todolist_db` |
 | 품질   | ESLint · Prettier · secretlint · husky | -          | 설치됨 (`DEV_TOOLING.md`)                     |
 | 품질   | Spotless (google-java-format AOSP)     | -          | 설치됨 (`DEV_TOOLING.md`)                     |
@@ -504,45 +504,45 @@ PostgreSQL은 따옴표 없는 식별자를 소문자로 접기 때문에, `Todo
 
 **환경**
 
-- [ ] PostgreSQL 데이터베이스 `postgres`에 스키마 `todolist_db` 존재, 백엔드 정상 연결
-- [ ] `./mvnw spring-boot:run` 무오류 기동, `/api/health` 200
-- [ ] `npm run build` 성공
-- [ ] `npm run typecheck` 통과
+- [x] PostgreSQL 데이터베이스 `postgres`에 스키마 `todolist_db` 존재, 백엔드 정상 연결
+- [x] `./mvnw spring-boot:run` 무오류 기동, `/api/health` 200
+- [x] `npm run build` 성공
+- [x] `npm run typecheck` 통과
 
 **인증**
 
-- [ ] 회원가입 시 사용자 생성 + JWT 쿠키 발급
-- [ ] 로그인 시 유효한 JWT 발급, **응답 본문에 토큰 값 없음**
-- [ ] 구글 로그인 정상 동작, 동일 이메일 계정 연결 확인
-- [ ] 보호된 엔드포인트는 쿠키 없이 접근 불가
+- [x] 회원가입 시 사용자 생성 + JWT 쿠키 발급
+- [x] 로그인 시 유효한 JWT 발급, **응답 본문에 토큰 값 없음**
+- [ ] 구글 로그인 정상 동작, 동일 이메일 계정 연결 확인 — 실제 구글 계정이 필요해 자동 검증 불가, 사용자 수동 확인 필요
+- [x] 보호된 엔드포인트는 쿠키 없이 접근 불가
 
 **기능**
 
-- [ ] Todo CRUD 전 과정 동작 (목록·작성·상세·수정·토글·삭제)
-- [ ] 페이지네이션 정상 (총 건수·페이지 수·정렬)
-- [ ] 필터·검색 동작
-- [ ] Soft Delete 시 `deleted_at` 갱신, 목록에서 제외
-- [ ] 완료 토글·삭제가 즉시 반영되고 실패 시 롤백
+- [x] Todo CRUD 전 과정 동작 (목록·작성·상세·수정·토글·삭제)
+- [x] 페이지네이션 정상 (총 건수·페이지 수·정렬)
+- [x] 필터·검색 동작
+- [x] Soft Delete 시 `deleted_at` 갱신, 목록에서 제외
+- [x] 완료 토글·삭제가 즉시 반영되고 실패 시 롤백
 
 **보안**
 
-- [ ] 타인 리소스 접근 시 404 (`/api/todos/{id}` 전 계열 + `/todos/[id]` 화면)
-- [ ] `<script>` 포함 설명 저장 시 제거됨
-- [ ] **저장소에 평문 자격증명이 커밋되어 있지 않음** (DB 비밀번호·JWT 시크릿·구글 시크릿)
-- [ ] DB의 password 컬럼에 평문 없음
-- [ ] `npm run secretlint` 통과
+- [x] 타인 리소스 접근 시 404 (`/api/todos/{id}` 전 계열 + `/todos/[id]` 화면)
+- [x] `<script>` 포함 설명 저장 시 제거됨
+- [x] **저장소에 평문 자격증명이 커밋되어 있지 않음** (DB 비밀번호·JWT 시크릿·구글 시크릿)
+- [x] DB의 password 컬럼에 평문 없음
+- [x] `npm run secretlint` 통과
 
 **UI**
 
-- [ ] 라이트/다크 토글 동작 및 유지
-- [ ] 320 / 768 / 1280px 레이아웃 정상
-- [ ] 로딩·에러·빈 상태 모두 구현
+- [x] 라이트/다크 토글 동작 및 유지
+- [x] 320 / 768 / 1280px 레이아웃 정상
+- [x] 로딩·에러·빈 상태 모두 구현
 
 **품질**
 
-- [ ] `./mvnw verify` 통과 (Spotless 포맷 검사 + 컴파일 + 테스트)
-- [ ] `npm run check` 통과 (typecheck + lint:strict + format:check)
-- [ ] Swagger UI에서 전체 API 확인 가능
+- [x] `./mvnw verify` 통과 (Spotless 포맷 검사 + 컴파일 + 테스트)
+- [x] `npm run check` 통과 (typecheck + lint:strict + format:check)
+- [x] Swagger UI에서 전체 API 확인 가능
 
 ---
 
