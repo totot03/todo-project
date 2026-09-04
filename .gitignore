@@ -26,6 +26,11 @@ out/
 target/
 .next/
 
+# 업로드 원본 저장소 (M7)
+#   file.storage.local.base-dir 기본값(../upload)이 가리키는 곳으로, 앱이 기동 시 자동 생성한다.
+#   사용자가 올린 이미지 원본이 쌓이는 자리이므로 저장소에 절대 커밋하지 않는다.
+upload/
+
 # 로그
 *.log
 npm-debug.log*
